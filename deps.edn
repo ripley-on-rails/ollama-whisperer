@@ -1,0 +1,19 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.3"}
+        metosin/jsonista {:mvn/version "0.3.8"}
+        camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.3"}
+        aleph/aleph {:mvn/version "0.8.0"}}
+ :aliases
+ {:test
+  ;; run tests with clj -X:test or clj -T:build test
+  {:extra-paths ["test"]
+   :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                io.github.cognitect-labs/test-runner
+                {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
+   ;;:main-opts ["-m" "cognitect.test-runner"]
+   ;;:exec-fn cognitect.test-runner.api/test
+   }
+  :build {:deps {io.github.clojure/tools.build
+                 {:mvn/version "0.10.3"}
+                 slipset/deps-deploy {:mvn/version "0.2.2"}}
+          :ns-default build}}}
