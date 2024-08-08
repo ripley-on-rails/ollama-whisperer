@@ -3,6 +3,10 @@
 
 (s/check-asserts true)
 
+(s/def ::string-or-coll-iof-strings
+  (s/or :string string?
+        :coll-of-strings (s/coll-of string?)))
+
 (s/def :options/model string?)
 (s/def :options/prompt string?)
 (s/def :options/images (s/coll-of string?))
@@ -12,6 +16,8 @@
 (s/def :options/template string?)
 (s/def :options/context (s/coll-of int?))
 (s/def :options/stream boolean?)
+(s/def :options/truncate boolean?)
+(s/def :options/input ::string-or-coll-iof-strings)
 (s/def :options/raw boolean?)
 (s/def :options/keep-alive string?)
 (s/def :options/role #{"system" "user" "assistant"})
@@ -40,5 +46,12 @@
           :opt-un [:options/format
                    :options/options
                    :options/stream
+                   :options/keep-alive]))
+
+(s/def :api/embed
+  (s/keys :req-un [:options/model
+                   :options/input]
+          :opt-un [:options/truncate
+                   :options/options
                    :options/keep-alive]))
 
